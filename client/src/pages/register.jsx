@@ -7,7 +7,7 @@ export default function Register() {
 
   const handleRegister = async () => {
     try {
-      await axios.post("http://localhost:5000/register", {
+      await axios.post("https://deknek-assignment-gzjr.onrender.com/register", {
         email,
         password,
       });
