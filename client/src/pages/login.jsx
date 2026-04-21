@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -7,19 +8,18 @@ export default function Login() {
 
   const handleLogin = async () => {
     try {
-      // ✅ FIX: store response in res
       const res = await axios.post(
         "https://deknek-assignment-gzjr.onrender.com/login",
-        {
-          email,
-          password,
-        }
+        { email, password }
       );
 
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("email", res.data.email);
 
-      window.location.href = "/dashboard";
+      import { useNavigate } from "react-router-dom";
+
+const navigate = useNavigate();
+navigate("/dashboard");
     } catch (err) {
       alert(err.response?.data || "Login failed");
     }
@@ -44,6 +44,11 @@ export default function Login() {
       <br /><br />
 
       <button onClick={handleLogin}>Login</button>
+
+      <p style={{ marginTop: "20px" }}>
+        Don’t have an account?{" "}
+        <Link to="/register">Register</Link>
+      </p>
     </div>
   );
 }

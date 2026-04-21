@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -7,10 +8,10 @@ export default function Register() {
 
   const handleRegister = async () => {
     try {
-      await axios.post("https://deknek-assignment-gzjr.onrender.com/register", {
-        email,
-        password,
-      });
+      await axios.post(
+        "https://deknek-assignment-gzjr.onrender.com/register",
+        { email, password }
+      );
 
       alert("Registered Successfully ✅");
       window.location.href = "/";
@@ -38,6 +39,11 @@ export default function Register() {
       <br /><br />
 
       <button onClick={handleRegister}>Register</button>
+
+      <p style={{ marginTop: "20px" }}>
+        Already have an account?{" "}
+        <Link to="/">Login</Link>
+      </p>
     </div>
   );
 }
