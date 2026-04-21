@@ -1,10 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleRegister = async () => {
     try {
@@ -14,7 +15,7 @@ export default function Register() {
       );
 
       alert("Registered Successfully ✅");
-      window.location.href = "/";
+      navigate("/"); // ✅ smoother navigation
     } catch (err) {
       alert(err.response?.data || "Error");
     }
@@ -41,8 +42,7 @@ export default function Register() {
       <button onClick={handleRegister}>Register</button>
 
       <p style={{ marginTop: "20px" }}>
-        Already have an account?{" "}
-        <Link to="/">Login</Link>
+        Already have an account? <Link to="/">Login</Link>
       </p>
     </div>
   );

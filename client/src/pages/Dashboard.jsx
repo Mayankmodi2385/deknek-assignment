@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
   const [note, setNote] = useState("");
   const [notes, setNotes] = useState([]);
+  const navigate = useNavigate();
 
   const email = localStorage.getItem("email");
 
@@ -10,10 +12,9 @@ export default function Dashboard() {
     const token = localStorage.getItem("token");
 
     if (!token) {
-      window.location.href = "/";
+      navigate("/"); // ✅ FIXED
     }
 
-    // Load saved notes
     const savedNotes = JSON.parse(localStorage.getItem("notes")) || [];
     setNotes(savedNotes);
   }, []);
@@ -30,7 +31,7 @@ export default function Dashboard() {
 
   const logout = () => {
     localStorage.clear();
-    window.location.href = "/";
+    navigate("/"); // ✅ FIXED
   };
 
   return (
