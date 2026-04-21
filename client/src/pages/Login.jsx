@@ -1,11 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom"; // ✅ FIXED
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate(); // ✅ FIXED
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
@@ -17,33 +17,31 @@ export default function Login() {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("email", res.data.email);
 
-      navigate("/dashboard"); // ✅ FIXED
+      navigate("/dashboard");
     } catch (err) {
       alert(err.response?.data || "Login failed");
     }
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "100px" }}>
+    <div className="container">
       <h2>Login</h2>
 
       <input
         type="email"
-        placeholder="Email"
+        placeholder="Enter your email"
         onChange={(e) => setEmail(e.target.value)}
       />
-      <br /><br />
 
       <input
         type="password"
-        placeholder="Password"
+        placeholder="Enter your password"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <br /><br />
 
       <button onClick={handleLogin}>Login</button>
 
-      <p style={{ marginTop: "20px" }}>
+      <p>
         Don’t have an account? <Link to="/register">Register</Link>
       </p>
     </div>

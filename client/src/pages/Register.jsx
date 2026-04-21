@@ -15,33 +15,31 @@ export default function Register() {
       );
 
       alert("Registered Successfully ✅");
-      navigate("/"); // ✅ smoother navigation
+      navigate("/");
     } catch (err) {
       alert(err.response?.data || "Error");
     }
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "100px" }}>
-      <h2>Register</h2>
+    <div className="container">
+      <h2>Create Account</h2>
 
       <input
         type="email"
-        placeholder="Email"
+        placeholder="Enter your email"
         onChange={(e) => setEmail(e.target.value)}
       />
-      <br /><br />
 
       <input
         type="password"
-        placeholder="Password"
+        placeholder="Create password"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <br /><br />
 
       <button onClick={handleRegister}>Register</button>
 
-      <p style={{ marginTop: "20px" }}>
+      <p>
         Already have an account? <Link to="/">Login</Link>
       </p>
     </div>

@@ -12,7 +12,7 @@ export default function Dashboard() {
     const token = localStorage.getItem("token");
 
     if (!token) {
-      navigate("/"); // ✅ FIXED
+      navigate("/");
     }
 
     const savedNotes = JSON.parse(localStorage.getItem("notes")) || [];
@@ -20,7 +20,7 @@ export default function Dashboard() {
   }, []);
 
   const addNote = () => {
-    if (!note) return;
+    if (!note.trim()) return;
 
     const updatedNotes = [...notes, note];
     setNotes(updatedNotes);
@@ -31,30 +31,34 @@ export default function Dashboard() {
 
   const logout = () => {
     localStorage.clear();
-    navigate("/"); // ✅ FIXED
+    navigate("/");
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
+    <div className="dashboard">
       <h1>Dashboard 🚀</h1>
 
       <h3>Welcome, {email} 👋</h3>
 
-      <button onClick={logout}>Logout</button>
+      <button className="logout" onClick={logout}>
+        Logout
+      </button>
 
-      <hr style={{ margin: "30px" }} />
+      <hr />
 
       <h3>Add Notes</h3>
 
-      <input
-        placeholder="Write something..."
-        value={note}
-        onChange={(e) => setNote(e.target.value)}
-      />
+      <div className="notes-input">
+        <input
+          placeholder="Write something..."
+          value={note}
+          onChange={(e) => setNote(e.target.value)}
+        />
 
-      <button onClick={addNote}>Add</button>
+        <button onClick={addNote}>Add</button>
+      </div>
 
-      <ul>
+      <ul className="notes-list">
         {notes.map((n, index) => (
           <li key={index}>{n}</li>
         ))}
