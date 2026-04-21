@@ -7,13 +7,17 @@ export default function Login() {
 
   const handleLogin = async () => {
     try {
-     await axios.post("https://deknek-assignment-gzjr.onrender.com/login",{
-        email,
-        password,
-      });
+      // ✅ FIX: store response in res
+      const res = await axios.post(
+        "https://deknek-assignment-gzjr.onrender.com/login",
+        {
+          email,
+          password,
+        }
+      );
 
       localStorage.setItem("token", res.data.token);
-      localStorage.setItem("email", res.data.email); // ✅ NEW
+      localStorage.setItem("email", res.data.email);
 
       window.location.href = "/dashboard";
     } catch (err) {
