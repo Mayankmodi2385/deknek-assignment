@@ -6,8 +6,10 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 const app = express();
+app.use(cors({
+  origin: "*"
+}));
 app.use(express.json());
-app.use(cors());
 
 mongoose.connect(process.env.MONGO_URL)
   .then(() => console.log("MongoDB Connected ✅"))
