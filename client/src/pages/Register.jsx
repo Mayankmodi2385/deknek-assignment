@@ -5,13 +5,11 @@ import { Link, useNavigate } from "react-router-dom";
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false); // 🔥 loader
+  const [showPassword, setShowPassword] = useState(false); // 👁️
   const navigate = useNavigate();
 
   const handleRegister = async () => {
     try {
-      setLoading(true);
-
       await axios.post(
         "https://deknek-assignment-gzjr.onrender.com/register",
         { email, password }
@@ -19,11 +17,8 @@ export default function Register() {
 
       alert("Registered Successfully ✅");
       navigate("/");
-
     } catch (err) {
       alert(err.response?.data || "Error");
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -42,17 +37,22 @@ export default function Register() {
           onChange={(e) => setEmail(e.target.value)}
         />
 
-        <input
-          type="password"
-          placeholder="Enter your password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        {/* PASSWORD WITH EYE */}
+        <div className="password-field">
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Enter your password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
-        <button onClick={handleRegister} disabled={loading}>
-          {loading ? <div className="spinner"></div> : "Register"}
-        </button>
+          <span onClick={() => setShowPassword(!showPassword)}>
+            {showPassword ? "🙈" : "👁️"}
+          </span>
+        </div>
 
-        <p style={{ marginTop: "15px", textAlign: "center" }}>
+        <button onClick={handleRegister}>Register</button>
+
+        <p>
           Already have an account? <Link to="/">Login</Link>
         </p>
 

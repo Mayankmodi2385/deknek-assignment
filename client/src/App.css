@@ -213,3 +213,23 @@ button {
 .stat-card h2 {
   color: #6a5af9;
 }
+/* PASSWORD FIELD */
+.password-field {
+  position: relative;
+}
+
+/* INPUT INSIDE */
+.password-field input {
+  width: 100%;
+  padding-right: 40px;
+}
+
+/* EYE ICON */
+.password-field span {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+}
